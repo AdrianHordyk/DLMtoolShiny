@@ -3,14 +3,16 @@ setwd("E:/Dropbox/CAProject/DLMtoolkit/DLMtoolShiny") # Path to read files
 
 # Install dev DLMtool package from GitHub
 library(devtools)
-install_github("adrianhordyk/DLMtooldev") # Install dev package from GitHub   
+install_github("adrianhordyk/DLMtooldev") # Install dev package from GitHub (only once)   
 library(DLMtool) # use plotting functions from dev package
 
 MSEGrid <- expand.grid(Stock=c(1:3), Fleet=c(1:3))
 SFObs <- paste0("Stock", MSEGrid[,1], "_Fleet", MSEGrid[,2])
 SFFiles <- paste0(SFObs, ".Rdata")
+URLs <- paste0("https://github.com/AdrianHordyk/DLMtoolShiny/raw/master/", SFFiles)
 
-for (X in 1:length(SFFiles)) load(SFFiles[X]) # Load all MSE objects 
+for (X in 1:length(SFFiles)) load(SFFiles[X]) # Load all MSE objects from local
+# for (X in 1:length(SFFiles)) load(URLs[X]) # Alternative load MSE objects from github
 
 load("DLMData.Rdata") # Load data object
 
@@ -127,9 +129,9 @@ TradePlot(MSEObj, XAxis=PMs[[1]][Xchoice], YAxis=PMs[[1]][Ychoice],
 # All User Input #
 ##################
 
-Stock <- 3 # 1 2 3 
-Fleet <- 3 # 1 2 3 
-AvailData <- as.numeric(AvailDataChoices[1,]) # Available Data 
+Stock <- 1 # 1 2 3 
+Fleet <- 1 # 1 2 3 
+AvailData <- as.numeric(AvailDataChoices[64,]) # Available Data 
 
 XAxis <- PMs[[1]][c(3, 4)] # Choose two PMs for X-Axis
 YAxis <- PMs[[1]][c(1, 6)] # Choose two PMs for Y-Axis 
@@ -137,12 +139,17 @@ YAxis <- PMs[[1]][c(1, 6)] # Choose two PMs for Y-Axis
 XThresh <- c(50, 50) # Risk Thresholds 
 YThresh <- c(0, 0) 
 
+maxVar <- 15 
+ShowLabs <- FALSE # Print MP labels?
+ShowCols <- TRUE # Show background colors?
+
 TradePlot(ChooseSFOb(Stock=Stock, 
 	Fleet=Fleet), XAxis=XAxis, YAxis=YAxis, 
 	XThresh=XThresh, YThresh=YThresh, maxVar=maxVar, 
 	AvailMPs=FeaseMPs(AvailData, 
 	ChooseSFOb(Stock=Stock, Fleet=Fleet), AllFeaseObj), 
 	ShowLabs=ShowLabs, ShowCols=ShowCols)
+	
 
 # Show MP labels 
 TradePlot(ChooseSFOb(Stock=Stock, 
