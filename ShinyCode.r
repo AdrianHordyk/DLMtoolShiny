@@ -14,7 +14,8 @@ URLs <- paste0("https://github.com/AdrianHordyk/DLMtoolShiny/raw/master/", SFFil
 for (X in 1:length(SFFiles)) load(SFFiles[X]) # Load all MSE objects from local
 # for (X in 1:length(SFFiles)) load(URLs[X]) # Alternative load MSE objects from github
 
-load("DLMData.Rdata") # Load data object
+load("DLMData.Rdata") # Load data object from local 
+# load(url("https://github.com/AdrianHordyk/DLMtoolShiny/raw/master/DLMData.Rdata") # load data from github
 
 #############
 # Functions #
