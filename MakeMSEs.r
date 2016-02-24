@@ -1,5 +1,5 @@
-setwd("E:/Dropbox/CAProject/DLMtoolkit/DLMtoolShiny") # Path to save output files
-# setwd("~/Dropbox/CAProject/DLMtoolkit/DLMtoolShiny")
+setwd("E:/Dropbox/CAProject/DLMtoolkit/Shiny") # Path to save output files
+# setwd("~/Dropbox/CAProject/DLMtoolkit/Shiny")
 
 # Install dev DLMtool package from GitHub
 library(devtools)
